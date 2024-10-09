@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .home-icon-container {
+    @apply flex items-center;
+  }
+  .home-icon {
+    @apply h-3/4;
+  }
+}
