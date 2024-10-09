@@ -8,7 +8,7 @@ export default function SurahOne({ surahNumber }) {
   const [showNote, setShowNote] = useState({});
 
   async function fetchData() {
-    const res = await fetch(`/Quran.json`);
+    const res = await fetch(`/student-notes/Quran.json`);
     const resData = await res.json();
     setData(resData);
   }
@@ -18,6 +18,7 @@ export default function SurahOne({ surahNumber }) {
   }, []);
 
   useEffect(() => {
+    console.log(data);
     if (data.length > 0) {
       const filteredData = data.filter(
         (x) => x["Surah No"] === `${surahNumber}`,
