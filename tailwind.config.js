@@ -2,7 +2,14 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#152b4d",
+        secondary: "#cea434",
+        greybg: "#eef2f5",
+        accent: "#0e1f33",
+      },
+    },
     fontFamily: {
       sans: ['"Scheherazade New"', "sans-serif"],
     },
