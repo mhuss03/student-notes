@@ -1,6 +1,6 @@
 export default function HomeBar() {
   return (
-    <div className="bg-primary border-secondary sticky bottom-0 flex h-[8vh] w-full justify-around border-t-2 py-4">
+    <div className="sticky bottom-0 flex h-[8vh] w-full justify-around bg-primary py-4">
       <div className="home-icon-container">
         <svg
           xmlns="http://www.w3.org/2000/svg"

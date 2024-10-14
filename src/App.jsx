@@ -54,7 +54,7 @@ function App() {
 
       //Setting All Showing Note  -> True
       const initialShowNote = filteredData.reduce((acc, ayah) => {
-        acc[ayah.id] = true;
+        acc[ayah.id] = false;
         return acc;
       }, {});
       setShowNote(initialShowNote);

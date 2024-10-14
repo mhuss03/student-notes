@@ -9,9 +9,9 @@ export default {
         greybg: "#eef2f5",
         accent: "#0e1f33",
       },
-    },
-    fontFamily: {
-      sans: ['"Scheherazade New"', "sans-serif"],
+      fontFamily: {
+        ayah: ['"Scheherazade New"', "sans-serif"],
+      },
     },
   },
   plugins: [],

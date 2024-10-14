@@ -14,88 +14,105 @@ export default function DisplaySurah({
     <>
       <div className="flex h-auto min-h-screen w-full items-center justify-center bg-greybg py-6 text-greybg">
         {currentSurah ? (
-          <div className="flex w-4/5 flex-col items-center gap-4 md:w-3/5">
+          <div className="flex w-[95%] flex-col items-center gap-4">
             {/* Creates Card For Each Ayah  */}
             {currentSurah.map((ayah) => (
               <div
                 key={ayah.id}
-                className="flex w-full flex-col gap-4 rounded-xl bg-primary px-4 py-6 text-greybg"
+                className="flex w-full flex-col overflow-hidden rounded-xl bg-primary text-greybg"
               >
                 {/* Ayah Div */}
-                <div className="ml-[5%] text-center leading-[3.2rem] md:text-xl md:leading-[4rem] lg:text-3xl lg:leading-[4.5rem]">
+                <div
+                  className="font-ayah ml-[5%] p-4 text-right font-semibold leading-[3.2rem] md:p-8 md:text-xl md:leading-[4rem] lg:text-3xl lg:leading-[4.5rem]"
+                  style={{ wordSpacing: "0.3rem" }}
+                >
                   {ayah["Ayah Text"]}
                 </div>
                 {/* Translation Div */}
                 {showTranslation[ayah.id] ? (
-                  <div
-                    onClick={() => toggleVisibility(ayah.id, "translation")}
-                    className="flex items-center"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="12 0 24 24"
-                      className="w-10 md:w-12 lg:w-14"
+                  <div className="flex flex-col gap-4 p-4">
+                    <div
+                      className="display-toggle"
+                      onClick={() => toggleVisibility(ayah.id, "translation")}
                     >
-                      <path
-                        d="M15 18 l6 -6 l-6 -6"
-                        stroke="#eef2f5"
-                        fill="none"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                    <div className="md:text-2xl">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="4 0 24 24"
+                        className="translation-caret rotate-90"
+                      >
+                        <path
+                          d="M15 18 l6 -6 l-6 -6"
+                          stroke="#eef2f5"
+                          fill="none"
+                          strokeWidth="2"
+                        />
+                      </svg>
+                      <h3 className="toggle-text">Translation</h3>
+                    </div>
+                    <div className="font-semibold md:text-2xl md:font-medium">
                       {ayah["Saheeh International Translation"]}
                     </div>
                   </div>
                 ) : (
-                  <div onClick={() => toggleVisibility(ayah.id, "translation")}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 -4 24 24"
-                      className="w-10 rotate-90 md:w-12 lg:w-14"
+                  <div className="p-4">
+                    <div
+                      onClick={() => toggleVisibility(ayah.id, "translation")}
+                      className="display-toggle"
                     >
-                      <path
-                        d="M15 18 l6 -6 l-6 -6"
-                        stroke="white"
-                        fill="none"
-                        strokeWidth="2"
-                      />
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="8 0 24 24"
+                        className="translation-caret -rotate-90"
+                      >
+                        <path
+                          d="M15 18 l6 -6 l-6 -6"
+                          stroke="white"
+                          fill="none"
+                          strokeWidth="2"
+                        />
+                      </svg>
+                      <h3 className="toggle-text">Translation</h3>
+                    </div>
                   </div>
                 )}
                 {/* Note Div */}
                 {showNote[ayah.id] ? (
-                  <div className="flex h-auto flex-col items-center gap-2">
-                    <div className="w-full">
+                  <div className="flex h-auto flex-col gap-4 bg-[#2d425f] p-4">
+                    <div
+                      className="display-toggle"
+                      onClick={() => toggleVisibility(ayah.id, "note")}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 24 24"
-                        fill="#eef2f5"
-                        className="w-8 md:w-10 lg:w-12"
-                        onClick={() => toggleVisibility(ayah.id, "note")}
+                        viewBox="8 0 24 24"
+                        className="translation-caret rotate-90"
                       >
-                        <path d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z M 8 12 L 8 14 L 16 14 L 16 12 L 8 12 z M 8 16 L 8 18 L 16 18 L 16 16 L 8 16 z"></path>
+                        <path
+                          d="M15 18 l6 -6 l-6 -6"
+                          stroke="white"
+                          fill="none"
+                          strokeWidth="2"
+                        />
                       </svg>
+                      <h3 className="toggle-text">Notes</h3>
                     </div>
                     {/* Saved Note Div */}
-                    <div className="flex w-full flex-wrap gap-2 rounded-md px-2 py-4">
+                    <div className="flex w-full flex-wrap gap-2 rounded-md">
                       {savedNote[ayah.id]?.length > 0 &&
                         savedNote[ayah.id].map((note, index) => (
                           <div
-                            className="flex w-full flex-col justify-between gap-2 rounded-md bg-greybg px-4 py-2 text-primary md:w-1/4"
+                            className="flex w-full flex-col justify-between gap-4 rounded-md bg-[#41556e] p-4 md:w-1/4"
                             key={`${ayah.id}-${index}`}
                           >
-                            <div>
-                              <h3 className="text-2xl font-semibold">
+                            <div className="flex flex-col gap-4">
+                              <h3 className="text-xl font-semibold">
                                 {note.title}
                               </h3>
-                              <p>{note.description}</p>
+                              <p className="text-xs">{note.description}</p>
                             </div>
-                            <div className="flex justify-center gap-4">
+                            <div className="flex justify-end gap-4">
                               <button
-                                className="rounded-md bg-secondary px-2 py-1 text-greybg"
+                                className="notes-button bg-[#3599d6]"
                                 // onClick={() =>
                                 //   handleEditNote(ayah.id, true, index)
                                 // }
@@ -103,7 +120,7 @@ export default function DisplaySurah({
                                 Edit
                               </button>
                               <button
-                                className="bg rounded-md bg-red-500 px-2 py-1 text-greybg"
+                                className="notes-button bg-[#e84b42]"
                                 onClick={() => handleDeleteNote(ayah.id, index)}
                               >
                                 Delete
@@ -112,28 +129,56 @@ export default function DisplaySurah({
                           </div>
                         ))}
                     </div>
-                    <div className="flex w-4/5 flex-col justify-center gap-2 md:w-1/4">
+                    <div className="w- flex justify-end">
                       <button
-                        className="rounded-md bg-secondary px-2 py-1 text-greybg"
+                        className="h-12 w-12 rounded-full bg-secondary px-2 py-1 text-greybg"
                         onClick={() => handleAddNote(ayah.id, false)}
                       >
-                        Add Note
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                          <g
+                            id="SVGRepo_tracerCarrier"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></g>
+                          <g id="SVGRepo_iconCarrier">
+                            {" "}
+                            <path
+                              d="M6 12H18M12 6V18"
+                              stroke="#FFF"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            ></path>{" "}
+                          </g>
+                        </svg>
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <div className="flex h-1/5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      x="0px"
-                      y="0px"
-                      viewBox="0 0 24 24"
-                      fill="#4fa6af"
-                      className="w-8 md:w-10 lg:w-12"
+                  <div className="bg-[#2d425f] p-4">
+                    <div
                       onClick={() => toggleVisibility(ayah.id, "note")}
+                      className="display-toggle"
                     >
-                      <path d="M 6 2 C 4.9057453 2 4 2.9057453 4 4 L 4 20 C 4 21.094255 4.9057453 22 6 22 L 18 22 C 19.094255 22 20 21.094255 20 20 L 20 8 L 14 2 L 6 2 z M 6 4 L 13 4 L 13 9 L 18 9 L 18 20 L 6 20 L 6 4 z M 8 12 L 8 14 L 16 14 L 16 12 L 8 12 z M 8 16 L 8 18 L 16 18 L 16 16 L 8 16 z"></path>
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="8 0 24 24"
+                        className="translation-caret -rotate-90"
+                      >
+                        <path
+                          d="M15 18 l6 -6 l-6 -6"
+                          stroke="white"
+                          fill="none"
+                          strokeWidth="2"
+                        />
+                      </svg>
+                      <h3 className="toggle-text">Notes</h3>
+                    </div>
                   </div>
                 )}
               </div>
