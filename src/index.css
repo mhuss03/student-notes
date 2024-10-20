@@ -19,6 +19,31 @@
     @apply inline-block text-sm;
   }
   .notes-button {
-    @apply rounded-md p-2 text-sm font-semibold text-greybg;
+    @apply p-2 text-sm font-semibold text-greybg;
   }
 }
+
+.section-color {
+  background-color: #F2F2F2;
+}
+
+.icon {
+  color: #7A7F8F;
+  /* color: #25b28f; */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.icon:hover {
+  color: #25b28f;
+}
+
+/* .mouse-over {
+  border-radius: 50%;
+  transition: 0.2s ease;
+  padding: 5px;
+}
+
+.mouse-over:hover {
+  background-color: white;
+} */

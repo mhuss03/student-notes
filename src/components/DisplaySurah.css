@@ -1,0 +1,72 @@
+.container-surah {
+    z-index: 0;
+    background-color: white;
+}
+
+.container-per-surah {
+    position: relative;
+    /* background-color: #F6FAFD; */
+    color: #3b3b3b;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    border-bottom: 1px solid #7a7f8f;
+}
+
+.surah-title {
+    font-family: "Reem Kufi Ink", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px; 
+}
+
+.surah-panel {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.ayah-no, .add-notes {
+    display: inline-block;
+}
+.add-notes {
+    margin-right: 20px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+.ayah-no {
+    color: #7a7f8f;
+}
+
+
+.container-notes {
+    background-color: none;
+}
+
+.translation {
+    position: relative;
+}
+
+.display-toggle {
+    cursor: pointer;
+    padding-bottom: 20px!important;
+    padding-right: 5px!important;
+}
+
+.toggle-text {
+    position: absolute;
+    right: 35px;
+}
+
+.translation-caret {
+    position: absolute;
+    right: 5px;
+}
+
+.container-saved-note {
+    color: #3b3b3b;
+    border-radius: 15px;
+}
+
+.danger:hover {
+    color: red!important;
+}

@@ -1,0 +1,7 @@
+.icon.home-bar {
+    color: #F2F2F2;
+}
+
+.icon.home-bar:checked {
+    color: #25b28f;
+}

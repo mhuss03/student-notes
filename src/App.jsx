@@ -5,6 +5,7 @@ import Modal from "./components/Modal";
 import DisplaySurah from "./components/DisplaySurah";
 import NavBar from "./components/NavBar";
 import SettingsModal from "./components/SettingsModal";
+import './index.css';
 
 function App() {
   const [showSettings, setShowSettings] = useState(false);
@@ -43,6 +44,7 @@ function App() {
       const filteredData = data.filter(
         (x) => x["Surah No"] === `${surahNumber}`,
       );
+      //console.log(filteredData);
       setCurrentSurah(filteredData);
 
       //Setting All Translation -> True
@@ -62,8 +64,9 @@ function App() {
   }, [surahNumber, data]);
 
   // Dropdown Surah Number search
-  const onSurahChange = (event) => {
-    setSurahNumber(event.target.value);
+  const onSurahChange = (surahNo) => {
+    setSurahNumber(surahNo);
+    //console.log("App.js Line 69: " + surahNo);
   };
 
   const onSettingsModalChange = (open) => {
@@ -172,7 +175,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="main-container flex flex-col">
         {/* NavBar */}
         <NavBar
           surahNumber={surahNumber}
