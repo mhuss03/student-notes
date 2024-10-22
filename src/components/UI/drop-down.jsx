@@ -1,4 +1,5 @@
 import { IoMdArrowDropdown } from "react-icons/io";
+import { AnimatePresence, motion } from "framer-motion";
 import './drop-down.css';
 import { useState, useEffect, useRef } from 'react';
 
@@ -42,7 +43,6 @@ export default function DropDown({surahs, surahNumber, handleSurahChange}) {
 
   //console.log(surahData);
 
-
   return (
     <>
         <div className="container-drop-down">
@@ -60,28 +60,38 @@ export default function DropDown({surahs, surahNumber, handleSurahChange}) {
             <IoMdArrowDropdown className='drop-down-icon' />
           </div>
 
-          {
-            open && (
-              <div className='drop-down-items' 
-                   ref={myRef} 
-                   onClick={handleClickInside}>
-                <ul className='list-items'>
-                  {surahs.map((surah) => {
-                    return (
-                      <li key={surah.name} 
-                          className='list-item' 
-                          value={surah.surahNumber}
-                          onChange={handleSurahChange}
-                          onClick={() => {handleClose(surah.name, surah.surahNumber)}}>
-                            
-                            {surah.surahNumber} - {surah.name}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )
-          }          
+          <AnimatePresence>
+            {
+              open && (
+                <motion.div 
+                    variants={{
+                      hidden: { opacity: 0, y: -30 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    className='drop-down-items' 
+                    ref={myRef} 
+                    onClick={handleClickInside}>
+                  <ul className='list-items'>
+                    {surahs.map((surah) => {
+                      return (
+                        <li key={surah.name} 
+                            className='list-item' 
+                            value={surah.surahNumber}
+                            onChange={handleSurahChange}
+                            onClick={() => {handleClose(surah.name, surah.surahNumber)}}>
+                              
+                              {surah.surahNumber} - {surah.name}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </motion.div>
+              )
+            } 
+          </AnimatePresence>
         </div>
     </>
   )

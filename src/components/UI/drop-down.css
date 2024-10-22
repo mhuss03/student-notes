@@ -42,6 +42,7 @@
 }
 .list-items {
     /* background-color: blue; */
+    cursor: pointer;
 }
 
 .list-item {

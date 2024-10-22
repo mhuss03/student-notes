@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import './DisplaySurah.css';
 import { PiNoteLight } from "react-icons/pi";
 import { MdNoteAdd } from "react-icons/md";
 import { MdEditDocument } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
+import { IoMdArrowDropup } from "react-icons/io";
 
 
 export default function DisplaySurah({
@@ -16,6 +18,9 @@ export default function DisplaySurah({
   handleAddNote,
   handleEditNote,
 }) {
+
+  const buttonHover = { scale: 1.2 };
+  const buttonTransition = { type: 'spring', stiffness: 500 };
 
   return (
     <>
@@ -30,12 +35,14 @@ export default function DisplaySurah({
               >
                 <div className="surah-panel section-color">
                   <p className="ayah-no ms-4">{ayah["Surah No"]} : {ayah["Ayah No"]}</p>
-                  <button
+                  <motion.button
+                        whileHover={buttonHover}
+                        transition={buttonTransition}
                         className="add-notes mouse-over ms-5 mb-2.5"
                         onClick={() => handleAddNote(ayah.id, false)}
                   >
                     <MdNoteAdd className="icon" size={22} />
-                  </button>
+                  </motion.button>
                 </div>
                 {/* Ayah Div */}
                 <div
@@ -57,83 +64,80 @@ export default function DisplaySurah({
                   </div>
                 )}
                 {/* Note Div */}
-                {showNote[ayah.id] ? (
-                  <div className="container-notes flex h-auto flex-col gap-4 p-4">
-                    <div
-                      className="display-toggle"
-                      onClick={() => toggleVisibility(ayah.id, "note")}
-                    >
-                      <h3 className="toggle-text">Notes</h3>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="8 0 24 24"
-                        className="translation-caret rotate-90"
-                      >
-                        <path
-                          d="M15 18 l6 -6 l-6 -6"
-                          stroke="black"
-                          fill="none"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    </div>
-                    {/* Saved Note Div */}
-                    <div className="flex w-full flex-wrap gap-2 rounded-md">
-                      {savedNote[ayah.id]?.length > 0 &&
-                        savedNote[ayah.id].map((note, index) => (
-                          <div
-                            className="container-saved-note section-color flex w-full flex-col justify-between gap-4 p-4 md:w-1/4"
-                            key={`${ayah.id}-${index}`}
-                          >
-                            <div className="flex flex-col gap-4">
-                              <h3 className="text-xl font-semibold">
-                                {note.title}
-                              </h3>
-                              <p className="text-xs">{note.description}</p>
-                            </div>
-                            <div className="flex justify-end gap-4">
-                              <button
-                                className="mouse-over"
-                                // onClick={() =>
-                                //   handleEditNote(ayah.id, true, index)
-                                // }
-                              >
-                                <MdEditDocument className="icon" size={20} />
-                              </button>
-                              <button
-                                className="mouse-over"
-                                onClick={() => handleDeleteNote(ayah.id, index)}
-                              >
-                                <MdDeleteForever className="icon danger" size={22} />
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
+                <div
+                  className="display-toggle"
+                  onClick={() => toggleVisibility(ayah.id, "note")}>
+                    <h3 className="toggle-text">Notes</h3>
+                    <motion.button 
+                      animate={{
+                        rotate: showNote[ayah.id] ? 180 : 0
+                      }}
+                      className="translation-caret">
+                      <IoMdArrowDropup className="mt-0.5" />
+                    </motion.button>
+                </div>
+                
+                <AnimatePresence>
+                  {showNote[ayah.id] ? (
+                    <div className="container-notes flex h-auto flex-col gap-4 p-4">
+                    
+                      {/* Saved Note Div */}
+                      <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          transition={{ ease: "easeOut", type: 'spring', stiffness: 150 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="flex w-full flex-wrap gap-2 rounded-md">
 
-                  </div>
-                ) : (
-                  <div className="container-notes p-4">
-                    <div
-                      onClick={() => toggleVisibility(ayah.id, "note")}
-                      className="display-toggle"
-                    >
-                      <h3 className="toggle-text">Notes</h3>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="8 0 24 24"
-                        className="translation-caret -rotate-90"
-                      >
-                        <path
-                          d="M15 18 l6 -6 l-6 -6"
-                          stroke="black"
-                          fill="none"
-                          strokeWidth="2"
-                        />
-                      </svg>
+                        {savedNote[ayah.id]?.length > 0 ? (
+                          savedNote[ayah.id].map((note, index) => (
+                            <div
+                              className="container-saved-note section-color flex w-full flex-col justify-between gap-4 p-4 md:w-1/4"
+                              key={`${ayah.id}-${index}`}>
+
+                              <div className="flex flex-col gap-4">
+                                <h3 className="text-xl font-semibold">
+                                  {note.title}
+                                </h3>
+                                <p className="text-xs">{note.description}</p>
+                              </div>
+                              <div className="flex justify-end gap-4">
+                                <motion.button
+                                  whileHover={buttonHover}
+                                  transition={buttonTransition}
+                                  className="mouse-over"
+                                  // onClick={() =>
+                                  //   handleEditNote(ayah.id, true, index)
+                                  // }
+                                >
+                                  <MdEditDocument className="icon" size={20} />
+                                </motion.button>
+                                <motion.button
+                                  whileHover={buttonHover}
+                                  transition={buttonTransition}
+                                  className="mouse-over"
+                                  onClick={() => handleDeleteNote(ayah.id, index)}
+                                >
+                                  <MdDeleteForever className="icon danger" size={22} />
+                                </motion.button>
+                              </div>
+                            </div>
+                          ))) : (
+                            <div className="container-notes p-2 ps-5">
+                              <p className="text-gray-600">No notes found.</p>
+                            </div>
+                          )
+                        }
+                      </motion.div>       
+
                     </div>
-                  </div>
-                )}
+                  ) : (
+                    <div className="container-notes p-4">
+
+                    </div>
+                  )}
+                </AnimatePresence>
+
               </div>
             ))}
           </div>

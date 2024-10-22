@@ -1,5 +1,6 @@
 // import { data } from "autoprefixer";
 import React, { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import HomeBar from "./components/HomeBar";
 import Modal from "./components/Modal";
 import DisplaySurah from "./components/DisplaySurah";
@@ -205,13 +206,19 @@ function App() {
         onTranslationChange={onTranslationChange}
         onToggleNoteChange={onToggleNoteChange}
       ></SettingsModal>
-      <Modal
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        onSave={handleNoteSave}
-        onNoteChange={handleNoteChange}
-        editNoteData={editData}
-      ></Modal>
+
+      <AnimatePresence>
+        {
+          isOpen && <Modal
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+            onSave={handleNoteSave}
+            onNoteChange={handleNoteChange}
+            editNoteData={editData}
+          ></Modal>
+        }
+      </AnimatePresence>
+
       <HomeBar></HomeBar>
     </>
   );

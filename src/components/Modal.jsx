@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import ReactDom from "react-dom";
 
-export default function Modal({
-  open,
+export default function ({
+  //open,
   children,
   onClose,
   onSave,
   onNoteChange,
   editNoteData,
 }) {
-  if (!open) return null;
+  // if (!open) return null;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -23,7 +24,15 @@ export default function Modal({
 
   return ReactDom.createPortal(
     <>
-      <div className="fixed right-0 top-0 z-[1000] flex h-full w-full items-center justify-center backdrop-blur-sm">
+      <motion.div 
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          className="portal fixed right-0 top-0 z-[1000] flex h-full w-full items-center justify-center backdrop-blur-sm">
         <div className="h-3/5 w-3/4 rounded-md border-2 border-accent bg-greybg px-6 py-4 md:w-3/5 lg:h-3/5 lg:w-2/5 xl:h-1/2">
           <div className="flex justify-between">
             <h1 className="text-xl font-semibold text-accent">
@@ -65,7 +74,7 @@ export default function Modal({
           </div>
         </div>
         {children}
-      </div>
+      </motion.div>
       {/* </div> */}
     </>,
     document.getElementById("portal"),

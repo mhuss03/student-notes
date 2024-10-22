@@ -17,27 +17,9 @@
     padding: 10px;
     margin-right: 5px;
     border-radius: 50%;
-    transition: 0.2s ease;
 }
 
 .green {
     color: #25b28f;
     cursor: pointer;
-    opacity: 0.8;
-    transition: 0.2s;
-}
-
-.green:hover {
-    opacity: 1;
-}
-
-select {
-
-
-  }
-
-.drop-down-list select {
-   
-
-    
 }
