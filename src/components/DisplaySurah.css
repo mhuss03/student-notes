@@ -8,7 +8,6 @@
     /* background-color: #F6FAFD; */
     color: #3b3b3b;
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-    border-bottom: 1px solid #7a7f8f;
 }
 
 .surah-title {
@@ -18,12 +17,12 @@
     font-size: 30px; 
 }
 
-.surah-panel {
+/* .surah-panel {
     display: flex;
     align-items: center;
     border-radius: 10px;
     height: 50px;
-}
+} */
 
 .ayah-no, .add-notes {
     display: inline-block;
@@ -34,6 +33,9 @@
     border-radius: 50%;
 }
 .ayah-no {
+    /* background-color: #F2F2F2;
+    padding: 10px;
+    border-radius: 50%; */
     color: #7a7f8f;
 }
 
@@ -69,4 +71,15 @@
 
 .danger:hover {
     color: red!important;
+}
+
+hr.rounded {
+    border-top: 4px solid #f2f2f2;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 596px) {
+    .font-ayah {
+        font-size: 22px;
+    }
 }

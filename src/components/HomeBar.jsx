@@ -21,7 +21,7 @@ export default function HomeBar() {
   }
 
   return (
-    <div className="home-panel sticky bottom-0 flex h-[8vh] w-full justify-around bg-[#7A7F8F] py-4">
+    <div className="home-panel sticky bottom-0 flex h-[8vh] w-full justify-around bg-[#F2F2F2] py-4">
       <div className="home-icon-container">
         <IoIosHome className={cssClasses} size={24} />
       </div>

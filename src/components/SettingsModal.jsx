@@ -14,7 +14,7 @@ export default function SettingsModal({
           showSettings ? "translate-x-0" : "translate-x-full"
         } flex flex-col gap-4`}
       >
-        <div className="flex h-60 w-3/4 max-w-96 flex-col justify-between rounded-md bg-greybg p-4">
+        <div className="flex h-60 w-3/4 max-w-96 flex-col justify-between rounded-md bg-[#f2f2f2] p-4">
           <div className="flex justify-between">
             <h3 className="whitespace-nowrap text-2xl font-bold tracking-tight">
               Settings

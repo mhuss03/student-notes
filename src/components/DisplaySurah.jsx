@@ -6,6 +6,7 @@ import { MdNoteAdd } from "react-icons/md";
 import { MdEditDocument } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { IoMdArrowDropup } from "react-icons/io";
+import DeleteNote from "./delete-note/DeleteNote";
 
 
 export default function DisplaySurah({
@@ -19,8 +20,22 @@ export default function DisplaySurah({
   handleEditNote,
 }) {
 
+  const [deleteNote, setDeleteNote] = useState(false);
+
   const buttonHover = { scale: 1.2 };
   const buttonTransition = { type: 'spring', stiffness: 500 };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentSurah]);
+
+  const handleConfirmDeleteNote = () => {
+    setDeleteNote(true);
+  }
+
+  const handleCloseDelete = () => {
+    setDeleteNote(false);
+  }
 
   return (
     <>
@@ -33,16 +48,8 @@ export default function DisplaySurah({
                 key={ayah.id}
                 className="container-per-surah flex w-full flex-col overflow-hidden"
               >
-                <div className="surah-panel section-color">
+                <div className="surah-panel">
                   <p className="ayah-no ms-4">{ayah["Surah No"]} : {ayah["Ayah No"]}</p>
-                  <motion.button
-                        whileHover={buttonHover}
-                        transition={buttonTransition}
-                        className="add-notes mouse-over ms-5 mb-2.5"
-                        onClick={() => handleAddNote(ayah.id, false)}
-                  >
-                    <MdNoteAdd className="icon" size={22} />
-                  </motion.button>
                 </div>
                 {/* Ayah Div */}
                 <div
@@ -58,13 +65,14 @@ export default function DisplaySurah({
                       {ayah["Saheeh International Translation"]}
                     </div>
                   </div>
+                  
                 ) : (
                   <div className="p-4">
 
                   </div>
                 )}
                 {/* Note Div */}
-                <div
+                {/* <div
                   className="display-toggle"
                   onClick={() => toggleVisibility(ayah.id, "note")}>
                     <h3 className="toggle-text">Notes</h3>
@@ -75,7 +83,19 @@ export default function DisplaySurah({
                       className="translation-caret">
                       <IoMdArrowDropup className="mt-0.5" />
                     </motion.button>
+                </div> */}
+
+                <div className="icon-panel">
+                  <motion.button
+                          whileHover={buttonHover}
+                          transition={buttonTransition}
+                          className="add-notes mouse-over ms-5 mb-2.5"
+                          onClick={() => handleAddNote(ayah.id, false)}
+                    >
+                      <MdNoteAdd className="icon" size={22} />
+                  </motion.button>
                 </div>
+
                 
                 <AnimatePresence>
                   {showNote[ayah.id] ? (
@@ -116,10 +136,22 @@ export default function DisplaySurah({
                                   whileHover={buttonHover}
                                   transition={buttonTransition}
                                   className="mouse-over"
-                                  onClick={() => handleDeleteNote(ayah.id, index)}
+                                  onClick={handleConfirmDeleteNote}
                                 >
                                   <MdDeleteForever className="icon danger" size={22} />
                                 </motion.button>
+
+                                <AnimatePresence>
+                                  {
+                                    deleteNote && (
+                                      <DeleteNote 
+                                          id={ayah.id} 
+                                          index={index} 
+                                          deleteNote={handleDeleteNote}
+                                          onClose={handleCloseDelete} />
+                                    )
+                                  }
+                                </AnimatePresence>
                               </div>
                             </div>
                           ))) : (
@@ -133,11 +165,11 @@ export default function DisplaySurah({
                     </div>
                   ) : (
                     <div className="container-notes p-4">
-
+                      
                     </div>
                   )}
                 </AnimatePresence>
-
+                <hr className="rounded" />
               </div>
             ))}
           </div>

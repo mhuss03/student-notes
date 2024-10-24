@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import './NavBar.css';
-import DropDown from "./UI/drop-down";
+import DropDown from "./UI/drop-down/drop-down";
 import { IoIosSettings } from "react-icons/io";
 import { IoChevronBack } from "react-icons/io5";
 

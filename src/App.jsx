@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import HomeBar from "./components/HomeBar";
-import Modal from "./components/Modal";
+import Modal from "./components/UI/modal/Modal";
 import DisplaySurah from "./components/DisplaySurah";
 import NavBar from "./components/NavBar";
 import SettingsModal from "./components/SettingsModal";
 import './index.css';
+import NewNote from "./components/new-note/NewNote";
 
 function App() {
   const [showSettings, setShowSettings] = useState(false);
@@ -133,7 +134,8 @@ function App() {
   };
 
   // Save to local Storage
-  const handleNoteSave = () => {
+  const handleNoteSave = (e) => {
+    e.preventDefault();
     const storageNoteData = getNotesFromLocalStorage();
     const combinedData = { ...storageNoteData };
 
@@ -174,6 +176,10 @@ function App() {
     setIsOpen(true);
   };
 
+  const handleDone = () => {
+    setIsOpen(false);
+  }
+
   return (
     <>
       <div className="main-container flex flex-col">
@@ -209,13 +215,14 @@ function App() {
 
       <AnimatePresence>
         {
-          isOpen && <Modal
-            open={isOpen}
-            onClose={() => setIsOpen(false)}
-            onSave={handleNoteSave}
-            onNoteChange={handleNoteChange}
-            editNoteData={editData}
-          ></Modal>
+          isOpen && (
+            <NewNote onDone={handleDone}
+                     onSave={handleNoteSave}
+                     onNoteChange={handleNoteChange}
+                     editNoteData={editData} />
+          )
+        //   open={isOpen}
+        // onClose={() => setIsOpen(false)}
         }
       </AnimatePresence>
 

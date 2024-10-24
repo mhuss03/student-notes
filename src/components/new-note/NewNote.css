@@ -1,0 +1,35 @@
+#new-note label {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: 'Quicksand', sans-serif;
+    color: #414956;
+}
+  
+  #new-note input,
+  #new-note textarea {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #d9e2f1;
+    background-color: #fff;
+    color: #414956;
+    font-size: 0.8rem;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+.new-note-actions button,
+.button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: #F2F2F2;
+  color: #3b3b3b;
+  border: none;
+}
+
+.new-note-actions button:hover,
+.button:hover {
+}
